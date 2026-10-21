@@ -1,0 +1,34 @@
+# Dependencias
+node_modules/
+
+# Compilación
+dist/
+dist-ssr/
+.vite/
+
+# Variables de entorno: contienen claves. Solo se suben los .env.example
+.env
+.env.*
+*.env
+!.env.example
+*.local
+
+# Supabase CLI (archivos locales)
+supabase/.branches/
+supabase/.temp/
+
+# Respaldo del código anterior (lavandería): se mantiene solo en local
+legacy-lavanderia/
+
+# Registros
+logs/
+*.log
+npm-debug.log*
+
+# Editores y sistema
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.sw?

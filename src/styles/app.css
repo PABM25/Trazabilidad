@@ -1,0 +1,560 @@
+/*
+ * Tema base inspirado en la identidad de BeMaker, en versión sutil:
+ * cada organización reemplaza --color-primario con su propio color (AuthContext lo aplica en :root).
+ */
+:root {
+    --color-primario: #010066; /* azul BeMaker */
+    --color-acento: #ed0807; /* rojo BeMaker: solo en detalles */
+    --azul: #1b65a6;
+    --celeste: #4ab0d9;
+    --crema: #f2e6d8;
+
+    --fondo: #f8f6f2;
+    --superficie: #ffffff;
+    --borde: #e9e4dc;
+    --texto: #1a1a3a;
+    --texto-suave: #6b6b80;
+
+    --fuente-titulos: 'Lexend', system-ui, sans-serif;
+    --fuente-texto: 'Archivo', system-ui, sans-serif;
+
+    --menu-ancho: 248px;
+    --radio: 0.75rem;
+
+    --bs-body-font-family: var(--fuente-texto);
+    --bs-body-color: var(--texto);
+    --bs-border-color: var(--borde);
+}
+
+body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: var(--fuente-texto);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.modal-title,
+.marca-nombre,
+.cifra {
+    font-family: var(--fuente-titulos);
+    letter-spacing: -0.01em;
+}
+
+.text-muted {
+    color: var(--texto-suave) !important;
+}
+
+.pantalla-carga {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    color: var(--texto-suave);
+}
+
+/* ---------- Botones y acentos con el color de la organización ---------- */
+.btn {
+    border-radius: 0.55rem;
+    font-weight: 500;
+}
+
+.btn-primario {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--color-primario);
+    --bs-btn-border-color: var(--color-primario);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: color-mix(in srgb, var(--color-primario) 85%, #000);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--color-primario) 85%, #000);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: color-mix(in srgb, var(--color-primario) 75%, #000);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--color-primario);
+    --bs-btn-disabled-border-color: var(--color-primario);
+}
+
+a {
+    color: var(--color-primario);
+}
+
+.nav-pills .nav-link {
+    color: var(--texto-suave);
+    border-radius: 0.55rem;
+}
+
+.nav-pills .nav-link.active,
+.page-item.active .page-link {
+    background: var(--color-primario);
+    border-color: var(--color-primario);
+    color: #fff;
+}
+
+.page-link {
+    color: var(--color-primario);
+}
+
+.progress-bar {
+    background: var(--color-primario);
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.55rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--color-primario) 18%, transparent);
+}
+
+.form-check-input:checked {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+/* ---------- Estructura ---------- */
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Menú lateral: siempre oscuro, teñido con el color de la organización */
+.menu-lateral {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--menu-ancho);
+    background: color-mix(in srgb, var(--color-primario) 70%, #05051a);
+    color: rgba(255, 255, 255, 0.72);
+    display: flex;
+    flex-direction: column;
+    z-index: 1040;
+    transition: transform 0.2s ease;
+}
+
+.menu-lateral nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem;
+}
+
+.menu-lateral nav a {
+    position: relative;
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 2px;
+    border-radius: 0.55rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.93rem;
+}
+
+.menu-lateral nav a:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+}
+
+.menu-lateral nav a.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Detalle de acento: una línea fina en el ítem activo */
+.menu-lateral nav a.active::before {
+    content: '';
+    position: absolute;
+    left: -0.75rem;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--color-acento);
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1.1rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.marca img {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 0.45rem;
+    background: #fff;
+    padding: 2px;
+}
+
+.marca-nombre {
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.marca-inicial {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 0.6rem;
+    background: var(--color-primario);
+    color: #fff;
+    font-family: var(--fuente-titulos);
+    font-weight: 600;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.menu-lateral .marca-inicial {
+    background: #fff;
+    color: var(--color-primario);
+}
+
+.marca-inicial.grande {
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+    border-radius: 0.85rem;
+}
+
+.pie-menu {
+    padding: 0.9rem 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.firma strong {
+    font-family: var(--fuente-titulos);
+    font-weight: 600;
+}
+
+.pie-menu .firma strong {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.contenido {
+    flex: 1;
+    margin-left: var(--menu-ancho);
+    min-width: 0;
+}
+
+.barra-superior {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    background: color-mix(in srgb, var(--superficie) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--borde);
+}
+
+.barra-superior h1 {
+    font-weight: 600;
+}
+
+.velo {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 26, 0.45);
+    z-index: 1030;
+}
+
+@media (max-width: 991.98px) {
+    .menu-lateral {
+        transform: translateX(-100%);
+    }
+
+    .menu-lateral.abierto {
+        transform: none;
+    }
+
+    .contenido {
+        margin-left: 0;
+    }
+
+    .barra-superior {
+        padding: 0.6rem 1rem;
+    }
+}
+
+/* ---------- Componentes ---------- */
+.card {
+    border-color: var(--borde);
+    border-radius: var(--radio);
+    box-shadow: 0 1px 2px rgba(1, 0, 102, 0.04);
+    overflow: hidden;
+}
+
+.card-header {
+    background: var(--superficie);
+    border-bottom-color: var(--borde);
+    font-family: var(--fuente-titulos);
+    font-weight: 500;
+    padding: 0.85rem 1.1rem;
+}
+
+.card-footer {
+    background: var(--superficie);
+    border-top-color: var(--borde);
+}
+
+.modal-content {
+    border: none;
+    border-radius: var(--radio);
+}
+
+.tarjeta-indicador {
+    border-left: 3px solid var(--color-primario);
+}
+
+.tarjeta-indicador .cifra {
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: var(--texto);
+}
+
+.tarjeta-indicador.borde-exito {
+    border-left-color: #1f9d6b;
+}
+
+.tarjeta-indicador.borde-alerta {
+    border-left-color: #e2a10b;
+}
+
+.tarjeta-indicador.borde-peligro {
+    border-left-color: var(--color-acento);
+}
+
+.lista-codigos {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.ficha {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.45rem 1rem;
+}
+
+.ficha dt {
+    font-weight: 500;
+    color: var(--texto-suave);
+}
+
+.ficha dd {
+    margin: 0;
+}
+
+.historial {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.punto {
+    display: inline-block;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+}
+
+.logo-previa {
+    max-height: 38px;
+    max-width: 60px;
+}
+
+.table {
+    --bs-table-hover-bg: color-mix(in srgb, var(--crema) 35%, transparent);
+}
+
+.table > :not(caption) > * > * {
+    padding: 0.65rem 1rem;
+    border-bottom-color: var(--borde);
+}
+
+.table thead th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--texto-suave);
+    font-weight: 600;
+    white-space: nowrap;
+    background: color-mix(in srgb, var(--fondo) 60%, #fff);
+}
+
+/* ---------- Login ---------- */
+.pantalla-login {
+    display: grid;
+    min-height: 100vh;
+    background: var(--fondo);
+}
+
+@media (min-width: 992px) {
+    .pantalla-login.con-panel {
+        grid-template-columns: minmax(380px, 44%) 1fr;
+    }
+}
+
+/* Panel de marca a la izquierda (solo en pantallas grandes) */
+.panel-marca {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    padding: 3rem;
+    color: #fff;
+    background: color-mix(in srgb, var(--color-primario) 80%, #05051a);
+}
+
+@media (min-width: 992px) {
+    .panel-marca {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+/* Forma decorativa sutil con los azules de la paleta */
+.panel-marca::after {
+    content: '';
+    position: absolute;
+    right: -18%;
+    bottom: -22%;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--celeste) 35%, transparent), transparent 65%);
+    pointer-events: none;
+}
+
+.panel-marca h2 {
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.15;
+    max-width: 22ch;
+}
+
+.panel-marca .linea-acento {
+    width: 48px;
+    height: 3px;
+    margin: 1.25rem 0;
+    border-radius: 3px;
+    background: var(--color-acento);
+}
+
+.panel-marca ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.panel-marca li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+}
+
+.panel-marca li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--celeste);
+    transform: translateY(-2px);
+}
+
+.panel-marca .firma {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.zona-formulario {
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+}
+
+.tarjeta-login {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid var(--borde);
+    box-shadow: 0 10px 30px rgba(1, 0, 102, 0.06);
+}
+
+.tarjeta-login .marca-inicial.grande {
+    background: var(--color-primario);
+}
+
+/* ---------- Modo demo ---------- */
+.recuadro-demo {
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--color-primario) 18%, transparent);
+    border-radius: var(--radio);
+    background: color-mix(in srgb, var(--crema) 45%, #fff);
+}
+
+.credenciales {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.25rem 0.75rem;
+    margin: 0.5rem 0 0.75rem;
+    font-size: 0.875rem;
+}
+
+.credenciales dt {
+    color: var(--texto-suave);
+    font-weight: 400;
+}
+
+.credenciales dd {
+    margin: 0;
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    color: var(--texto);
+    word-break: break-all;
+}
+
+.aviso-demo {
+    padding: 0.45rem 1rem;
+    background: color-mix(in srgb, var(--crema) 70%, #fff);
+    border-bottom: 1px solid var(--borde);
+    color: var(--texto);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.aviso-demo::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-acento);
+    vertical-align: middle;
+}
+
+.panel-marca .marca-inicial {
+    background: #fff;
+    color: var(--color-primario);
+}
+
+/* Pantallas de una sola tarjeta (Bienvenida) */
+.pantalla-login:not(.con-panel) {
+    place-items: center;
+    padding: 2rem 1rem;
+}
